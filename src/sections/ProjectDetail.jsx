@@ -33,7 +33,7 @@ const ProjectDetail = ({ project, onBack }) => {
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-3xl md:text-5xl lg:text-5xl font-bold tracking-tight"
+                            className="text-2xl md:text-4xl lg:text-4xl font-bold tracking-tight"
                         >
                             {project.title}
                         </motion.h1>
@@ -42,7 +42,7 @@ const ProjectDetail = ({ project, onBack }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.05 }}
-                                className="text-accent-primary text-lg md:text-xl font-mono italic"
+                                className="text-accent-primary text-sm md:text-base font-mono italic"
                             >
                                 {project.subtitle}
                             </motion.p>
@@ -51,7 +51,7 @@ const ProjectDetail = ({ project, onBack }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-text-secondary text-base md:text-lg font-mono leading-relaxed max-w-3xl"
+                            className="text-text-secondary text-sm md:text-base font-mono leading-relaxed max-w-3xl"
                         >
                             {project.intent}
                         </motion.p>
@@ -67,6 +67,16 @@ const ProjectDetail = ({ project, onBack }) => {
                                 className="px-6 py-3 bg-white/10 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300 font-mono text-sm font-bold uppercase tracking-widest"
                             >
                                 Source Code
+                            </a>
+                        )}
+                        {project.liveDemo && (
+                            <a
+                                href={project.liveDemo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 bg-accent-primary text-white rounded-full hover:brightness-110 transition-all duration-300 font-mono text-sm font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(202,62,49,0.3)]"
+                            >
+                                Live Demo
                             </a>
                         )}
                         {project.href && (
@@ -85,8 +95,8 @@ const ProjectDetail = ({ project, onBack }) => {
                 {/* Project Snippets Section - Scaled Down Carousel with Object Contain (Moved to Top) */}
                 <div className="space-y-10 max-w-5xl mx-auto mb-16">
                     <div className="space-y-3 text-center">
-                        <h2 className="text-lg font-mono uppercase tracking-[0.2em] text-accent-primary">Project Snippets</h2>
-                        <p className="text-text-secondary font-mono text-xl">Exploring the build through snapshots</p>
+                        <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-accent-primary">Project Snippets</h2>
+                        <p className="text-text-secondary font-mono text-base">Exploring the build through snapshots</p>
                     </div>
 
                     <div className="relative group mx-auto">
@@ -155,9 +165,9 @@ const ProjectDetail = ({ project, onBack }) => {
                     {/* Left: What I Built */}
                     <div className="lg:col-span-7">
                         {project.whatBuilt && (
-                            <div className="space-y-6">
-                                <h2 className="text-lg font-mono uppercase tracking-[0.2em] text-accent-primary">What I Built</h2>
-                                <div className="text-text-primary text-lg md:text-xl leading-relaxed whitespace-pre-line tracking-wide">
+                            <div className="space-y-4">
+                                <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-accent-primary">What I Built</h2>
+                                <div className="text-text-primary text-sm md:text-base leading-relaxed whitespace-pre-line tracking-wide">
                                     {project.whatBuilt}
                                 </div>
                             </div>
@@ -165,11 +175,11 @@ const ProjectDetail = ({ project, onBack }) => {
                     </div>
 
                     {/* Right: Tech List */}
-                    <div className="lg:col-span-5 p-8 glass-card border border-white/5 bg-white/5 rounded-3xl h-fit">
-                        <h2 className="text-lg font-mono uppercase tracking-[0.2em] text-accent-primary mb-6">What I worked with</h2>
-                        <ul className="space-y-3">
+                    <div className="lg:col-span-5 p-6 glass-card border border-white/5 bg-white/5 rounded-3xl h-fit">
+                        <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-accent-primary mb-4">What I worked with</h2>
+                        <ul className="space-y-2">
                             {project.techUsedList.map((tech, idx) => (
-                                <li key={idx} className="flex items-center gap-3 text-text-secondary font-mono text-lg border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                                <li key={idx} className="flex items-center gap-3 text-text-secondary font-mono text-sm border-b border-white/5 pb-2 last:border-0 last:pb-0">
                                     <span className="w-1.5 h-1.5 rounded-full bg-accent-primary shadow-[0_0_10px_rgba(202,62,49,0.5)]" />
                                     {tech}
                                 </li>
@@ -179,24 +189,24 @@ const ProjectDetail = ({ project, onBack }) => {
                 </div>
 
                 {/* How the System Works - Divided into 2 columns */}
-                <div className="space-y-6 mb-16 max-w-7xl">
-                    <h2 className="text-lg font-mono uppercase tracking-[0.2em] text-accent-primary">
+                <div className="space-y-5 mb-16 max-w-7xl">
+                    <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-accent-primary">
                         {project.systemSteps ? 'How the System Works' : project.whatBuilt ? 'How the System Works' : 'Refinement & Learning'}
                     </h2>
                     {project.systemSteps ? (
-                        <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+                        <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                             {project.systemSteps.map((step, index) => (
-                                <li key={index} className="flex gap-6 items-start">
-                                    <span className="font-mono text-accent-primary font-bold shrink-0 text-3xl">{index + 1}.</span>
+                                <li key={index} className="flex gap-4 items-start">
+                                    <span className="font-mono text-accent-primary font-bold shrink-0 text-xl">{index + 1}.</span>
                                     <div>
-                                        <strong className="text-white font-semibold text-lg md:text-xl">{step.title}</strong>
-                                        <p className="text-text-primary/90 text-base md:text-lg mt-2 leading-relaxed">{step.description}</p>
+                                        <strong className="text-white font-semibold text-sm md:text-base">{step.title}</strong>
+                                        <p className="text-text-primary/90 text-xs md:text-sm mt-1.5 leading-relaxed">{step.description}</p>
                                     </div>
                                 </li>
                             ))}
                         </ol>
                     ) : (
-                        <div className="text-text-primary text-lg md:text-xl leading-relaxed whitespace-pre-line">
+                        <div className="text-text-primary text-sm md:text-base leading-relaxed whitespace-pre-line">
                             {project.learned}
                         </div>
                     )}

@@ -40,13 +40,14 @@ const About = () => {
                     <div className="flex flex-col gap-6 flex-1">
                         <div className="flex flex-col gap-5 about-bio">
                             <p>
-                                I like learning by doing, usually by picking something apart, building it, and then rebuilding it a little better.
+                                Welcome to my little collection of experiments born out of curiosity and an urge to learn something new. 
                             </p>
                             <p>
-                                Over time, I’ve explored ideas across AI, machine learning, and systems through a mix of academic work and personal experiments. Not everything I build is meant to be a finished project; many of them are ways for me to understand how things work under the hood.
+                                Over the past few years, I’ve gone from machine learning and neural networks to language and vision models, NLP, embeddings, advanced RAG, AI agents, and automation. Some started as academic work, some came from random curiosity, and some simply began with an urge to learn something new and a “what if I tried this?” moment.
+
                             </p>
                             <p>
-                                I care more about depth than speed, and I often revisit ideas to refine them as my understanding improves. Right now, I’m focused on turning this exploration into more complete, end-to-end systems, while continuing to learn and go deeper.
+                               For now, I’m simply following that urge to keep learning, go deeper into the things that interest me, and see where it takes me.
                             </p>
                         </div>
                     </div>

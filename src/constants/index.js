@@ -80,77 +80,68 @@ const timelineData = [
 
 const myProjects = [
   {
-    id: "network-behavior-intelligence",
-    title: 'Network Behavior Intelligence',
-    subtitle: 'An exploratory system for behavioral network analysis',
-    intent: 'Exploring how network behavior patterns can be learned, interpreted, and monitored in real time.',
-    description: 'This project analyzes live network traffic to understand how a network normally behaves and highlights meaningful deviations using a combination of signal processing, machine learning, and contextual reasoning.',
-    story: `This project began as a simple anomaly detection experiment during a hackathon, where I trained a basic machine learning model on network traffic metrics.
+    id: 'beyond',
+    title: 'Beyond',
+    subtitle: 'An agentic AI travel planner for dynamic, end-to-end itinerary generation',
+    intent: 'Exploring how multi-agent LLM architectures, real-time travel APIs, and interactive interfaces can curate personalized, budget-conscious travel experiences.',
+    whatBuilt: `I built Beyond, an autonomous AI-driven travel planning platform that generates complete, day-by-day itineraries tailored to traveler style, live transit availability, and real-world costs.
 
-What started as a proof-of-concept quickly raised deeper questions:
+Travelers can start in two ways: pick a destination card and enter basic trip info for an instant draft itinerary, or use the chat interface to describe a dream vacation, entering transport, budget, hotel preferences, timeline, and destination together, letting the Planner Agent and Budget Agent draft a tailored plan from scratch.
 
-• Why do some "anomalies" look suspicious but are actually harmless?
-• How can a system understand structure in network behavior, not just volume spikes?
-• Can anomaly detection be made interpretable, not just reactive?
-
-Over time, I rebuilt the system end-to-end — refining data collection, introducing behavioral KPIs, adding contextual filters, and designing a dashboard that explains why the system believes something is normal or unusual.
-
-This project reflects that evolution from model-centric thinking to system-level intelligence.`,
-    whatBuilt: `I built a system that watches live network traffic and tries to understand how the network behaves, not just how busy it is.
-Instead of looking at raw packets or payloads, it summarizes traffic into simple behavioral signals like flow patterns, packet rates, and diversity.
-
-On top of that, I trained an unsupervised baseline model that learns what normal looks like for a given network.
-Anything unusual is checked again using context rules so normal browsing or streaming doesn't get flagged.
-
-The dashboard is meant to explain what's happening in plain terms, not just show alerts.
-The focus is on sustained, structural changes, not random spikes.`,
+Card-based drafts pull from a curated dataset. Chat-based drafts are grounded in live availability and pricing through the Planner and Budget agents. Either way, travelers can refine the result: swap an activity for live alternatives, delete what doesn't fit, or type a request like "calming cafe" to get matched, re-ranked options, all through the swap/add buttons or the chat itself.`,
     systemSteps: [
       {
-        title: 'Live Traffic Capture',
-        description: 'Network traffic is observed in real time using Tshark, extracting packet metadata without inspecting payloads.'
+        title: 'Intent Classification & Parameter Parsing',
+        description: 'Traveler inputs, whether from destination cards with basic info or a full dream-trip description in chat, are classified using Groq LLM to route requests into itinerary generation, a swap search, or a budget adjustment.'
       },
       {
-        title: 'Behavioral Windowing',
-        description: 'Packets are aggregated into short time windows to summarize network behavior rather than individual packets.'
+        title: 'Attraction Discovery & Grounding',
+        description: 'The Planner Agent queries the Google Places API alongside curated destination datasets to discover verified attractions matching the traveler\'s pace and preferences.'
       },
       {
-        title: 'KPI Feature Extraction',
-        description: 'Each window is converted into behavioral metrics such as packet rate, flow count, protocol balance, and entropy.'
+        title: 'Live Accommodation Retrieval',
+        description: 'Candidate stays are retrieved through SerpApi (Google Hotels) with live rates and ratings, re-ranked against user preferences using TF-IDF semantic scoring.'
       },
       {
-        title: 'Baseline Learning (Unsupervised ML)',
-        description: 'An autoencoder learns what "normal" traffic looks like for this specific network without labeled attack data.'
+        title: 'Multi-Modal Transit Routing',
+        description: 'The transport tool calculates transit connections, resolving IATA airport codes for flights and station codes for IRCTC railway routes with estimated fares and timings.'
       },
       {
-        title: 'Anomaly Scoring',
-        description: 'Deviations from the learned baseline are quantified using reconstruction error rather than fixed thresholds.'
+        title: 'Autonomous Budget Feasibility & Balancing',
+        description: 'The Budget Agent validates overall trip financial viability, balancing allocations across lodging, transit, dining, activities, and emergency buffers to prevent cost overruns.'
       },
       {
-        title: 'Persistence Filtering',
-        description: 'Only sustained deviations across multiple windows are considered, reducing sensitivity to short spikes.'
-      },
-      {
-        title: 'Contextual Interpretation',
-        description: 'Rule-based filters distinguish benign activity (browsing, streaming) from structurally suspicious patterns.'
-      },
-      {
-        title: 'Risk Assessment & Visualization',
-        description: 'Interpretable risk levels and explanations are generated and visualized as a live behavioral timeline.'
+        title: 'Interactive Refinement',
+        description: 'Travelers swap an activity for an alternative, delete what doesn\'t fit, or type a request to add something new, on either the card-based or chat-based itinerary, with each action re-triggering the search and re-ranking pipeline in place.'
       }
     ],
-    techUsedList: ['Python', 'FastAPI', 'PyTorch', 'Wireshark', 'Tshark', 'Next.js', 'TypeScript', 'SQLite', 'Tailwind CSS', 'Unsupervised Learning', 'Network Telemetry'],
-    github: 'https://github.com/Pratishtha-sh/Network-Behavior-Intelligence',
+    techUsedList: [
+      'LangGraph & StateGraph for multi-agent orchestration',
+      'Custom Planner Agent & Budget Agent with tool-calling',
+      'Groq (Llama 3 / GPT-OSS) for agentic LLM inference',
+      'FastAPI & Python',
+      'React 18 & TypeScript',
+      'Google Places API (v2)',
+      'SerpApi (Google Hotels & Flights)',
+    ],
+    github: 'https://github.com/Pratishtha-sh/Beyond',
     images: [
-      { url: '/images/network-analyser/Screenshot 2026-01-16 163613.png', caption: '' },
-      { url: '/images/network-analyser/Screenshot 2026-01-16 155149.png', caption: '' },
-      { url: '/images/network-analyser/Screenshot 2026-01-16 163719.png', caption: '' },
-      { url: '/images/network-analyser/Screenshot 2026-01-16 163730.png', caption: '' }
+      { url: '/images/beyond/image0.png', caption: '' },
+      { url: '/images/beyond/image1.png', caption: '' },
+      { url: '/images/beyond/image2.png', caption: '' },
+      { url: '/images/beyond/image3.png', caption: 'General Planner' },
+      { url: '/images/beyond/image4.png', caption: '' },
+      { url: '/images/beyond/image5.png', caption: '' },
+      { url: '/images/beyond/image6.png', caption: '' },
+      { url: '/images/beyond/image7.png', caption: 'Fully customized planner' },
+      { url: '/images/beyond/image8.png', caption: '' },
+      { url: '/images/beyond/image9.png', caption: '' },
     ],
     logo: '/images/project-logo1.png',
     logoStyle: {
-      backgroundColor: '#2A1816',
-      border: '0.2px solid #36201D',
-      boxShadow: '0px 0px 60px 0px #AA3C304D',
+      backgroundColor: '#0D1B2A',
+      border: '0.2px solid #1A3A5C',
+      boxShadow: '0px 0px 60px 0px #1E6FA44D',
     }
   },
   {
@@ -158,7 +149,7 @@ The focus is on sustained, structural changes, not random spikes.`,
     title: 'MedBuddy',
     subtitle: 'An AI-powered healthcare chatbot for reliable medical information',
     intent: 'Exploring how generative AI and retrieval systems can provide trustworthy, context-aware answers to health-related questions.',
-    whatBuilt: `I built MedBuddy, an AI-powered medical assistant that answers healthcare-related questions using trusted medical knowledge rather than relying only on a language model’s internal data.
+    whatBuilt: `I built MedBuddy, an AI-powered medical assistant that answers healthcare-related questions using trusted medical knowledge rather than relying only on a language model's internal data.
 
 The system retrieves relevant information from a curated medical knowledge base derived from The Gale Encyclopedia of Medicine, then uses a language model to generate clear, contextual responses.
 
@@ -168,7 +159,7 @@ The goal was to create a conversational tool that explains medical topics clearl
     systemSteps: [
       {
         title: 'Knowledge Base Preparation',
-        description: 'Medical content from The Gale Encyclopedia of Medicine is processed into structured documents used as the chatbot’s knowledge source.'
+        description: 'Medical content from The Gale Encyclopedia of Medicine is processed into structured documents used as the chatbot\'s knowledge source.'
       },
       {
         title: 'Embedding Creation',
@@ -180,7 +171,7 @@ The goal was to create a conversational tool that explains medical topics clearl
       },
       {
         title: 'Query Retrieval',
-        description: 'The user’s question is embedded and matched against the database to retrieve the most relevant medical passages.'
+        description: 'The user\'s question is embedded and matched against the database to retrieve the most relevant medical passages.'
       },
       {
         title: 'Context-Aware Generation',
@@ -252,6 +243,80 @@ Additionally, all interactions are logged into an Airtable database for permanen
       backgroundColor: '#1E2A2E',
       border: '0.2px solid #28373C',
       boxShadow: '0px 0px 60px 0px #3197954D',
+    }
+  },
+  {
+    id: "network-behavior-intelligence",
+    title: 'Network Behavior Intelligence',
+    subtitle: 'An exploratory system for behavioral network analysis',
+    intent: 'Exploring how network behavior patterns can be learned, interpreted, and monitored in real time.',
+    description: 'This project analyzes live network traffic to understand how a network normally behaves and highlights meaningful deviations using a combination of signal processing, machine learning, and contextual reasoning.',
+    story: `This project began as a simple anomaly detection experiment during a hackathon, where I trained a basic machine learning model on network traffic metrics.
+
+What started as a proof-of-concept quickly raised deeper questions:
+
+• Why do some "anomalies" look suspicious but are actually harmless?
+• How can a system understand structure in network behavior, not just volume spikes?
+• Can anomaly detection be made interpretable, not just reactive?
+
+Over time, I rebuilt the system end-to-end — refining data collection, introducing behavioral KPIs, adding contextual filters, and designing a dashboard that explains why the system believes something is normal or unusual.
+
+This project reflects that evolution from model-centric thinking to system-level intelligence.`,
+    whatBuilt: `I built a system that watches live network traffic and tries to understand how the network behaves, not just how busy it is.
+Instead of looking at raw packets or payloads, it summarizes traffic into simple behavioral signals like flow patterns, packet rates, and diversity.
+
+On top of that, I trained an unsupervised baseline model that learns what normal looks like for a given network.
+Anything unusual is checked again using context rules so normal browsing or streaming doesn't get flagged.
+
+The dashboard is meant to explain what's happening in plain terms, not just show alerts.
+The focus is on sustained, structural changes, not random spikes.`,
+    systemSteps: [
+      {
+        title: 'Live Traffic Capture',
+        description: 'Network traffic is observed in real time using Tshark, extracting packet metadata without inspecting payloads.'
+      },
+      {
+        title: 'Behavioral Windowing',
+        description: 'Packets are aggregated into short time windows to summarize network behavior rather than individual packets.'
+      },
+      {
+        title: 'KPI Feature Extraction',
+        description: 'Each window is converted into behavioral metrics such as packet rate, flow count, protocol balance, and entropy.'
+      },
+      {
+        title: 'Baseline Learning (Unsupervised ML)',
+        description: 'An autoencoder learns what "normal" traffic looks like for this specific network without labeled attack data.'
+      },
+      {
+        title: 'Anomaly Scoring',
+        description: 'Deviations from the learned baseline are quantified using reconstruction error rather than fixed thresholds.'
+      },
+      {
+        title: 'Persistence Filtering',
+        description: 'Only sustained deviations across multiple windows are considered, reducing sensitivity to short spikes.'
+      },
+      {
+        title: 'Contextual Interpretation',
+        description: 'Rule-based filters distinguish benign activity (browsing, streaming) from structurally suspicious patterns.'
+      },
+      {
+        title: 'Risk Assessment & Visualization',
+        description: 'Interpretable risk levels and explanations are generated and visualized as a live behavioral timeline.'
+      }
+    ],
+    techUsedList: ['Python', 'FastAPI', 'PyTorch', 'Wireshark', 'Tshark', 'Next.js', 'TypeScript', 'SQLite', 'Tailwind CSS', 'Unsupervised Learning', 'Network Telemetry'],
+    github: 'https://github.com/Pratishtha-sh/Network-Behavior-Intelligence',
+    images: [
+      { url: '/images/network-analyser/Screenshot 2026-01-16 163613.png', caption: '' },
+      { url: '/images/network-analyser/Screenshot 2026-01-16 155149.png', caption: '' },
+      { url: '/images/network-analyser/Screenshot 2026-01-16 163719.png', caption: '' },
+      { url: '/images/network-analyser/Screenshot 2026-01-16 163730.png', caption: '' }
+    ],
+    logo: '/images/project-logo1.png',
+    logoStyle: {
+      backgroundColor: '#2A1816',
+      border: '0.2px solid #36201D',
+      boxShadow: '0px 0px 60px 0px #AA3C304D',
     }
   }
 ];
